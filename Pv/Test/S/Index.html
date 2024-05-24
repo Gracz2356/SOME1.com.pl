@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wyniki Strzeleckie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #results {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Wyniki Strzeleckie</h1>
+        <button onclick="startCounting()">Start</button>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        let shots = [];
+
+        function startCounting() {
+            const numShots = prompt("Ile strzałów oddałeś?");
+            if (numShots) {
+                for (let i = 1; i <= numShots; i++) {
+                    const score = prompt(`Wynik strzału ${i}:`);
+                    shots.push(parseFloat(score));
+                }
+                showResults();
+            }
+        }
+
+        function showResults() {
+            const totalShots = shots.length;
+            const totalScore = shots.reduce((acc, val) => acc + val, 0);
+            const averageScore = totalScore / totalShots;
+
+            const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = `
+                <p>Liczba strzałów: ${totalShots}</p>
+                <p>Średnia seria: ${averageScore.toFixed(2)}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
